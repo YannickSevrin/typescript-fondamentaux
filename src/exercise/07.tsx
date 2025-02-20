@@ -4,58 +4,63 @@
 
 // ❌ NE PAS MODIFIER
 // Utilitaire ne faisant pas partie de l'exercice
-import displayText, { App, init } from "../lib/exerciseHelper"; 
+import displayText, { App, init } from "../lib/exerciseHelper"
 const exercice = () => {
-init()
+  init()
 
-// ✔️ Début de l'exercice
+  // ✔️ Début de l'exercice
 
-// 🐶 Modifile le type `car` avec toutes les propriétés demandée par 👨‍✈️ Hugo
-type car = any
-// 🐶 Complete la fonction `kineticEnergy` avec toutes les propriétés demandée par 👨‍✈️ Hugo
-// Fonction prenant en entrée 2 parametre
-// - speed un nombre obligatoire
-// - mass un nombre optionel
-function kineticEnergy() {
-  // calcul l'energie avec cette formule
-  // Energie (en Joule) = 0.5 x masse x vitesse ²
-  // utile Math pour le calcul au carré
-  // 📝 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
-  //
-  // ⛏️ décommente la ligne ci-dessous et met la formule dans result
-  // il s'agit d'une ternaire qui permet de retouner soit 'null' si 'mass' est 'null', soit un 'objet' avec la propriété 'result'
-  //return mass ? {result: _____ } : null
-}
+  // 🐶 Modifile le type `car` avec toutes les propriétés demandée par 👨‍✈️ Hugo
+  type car = {
+    name: string
+    maxSpeed?: number
+    mass?: number
+  }
+  // 🐶 Complete la fonction `kineticEnergy` avec toutes les propriétés demandée par 👨‍✈️ Hugo
+  // Fonction prenant en entrée 2 parametre
+  // - speed un nombre obligatoire
+  // - mass un nombre optionel
+  function kineticEnergy(speed: number, mass?: number) {
+    // calcul l'energie avec cette formule
+    // Energie (en Joule) = 0.5 x masse x vitesse ²
+    // utile Math pour le calcul au carré
+    // 📝 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
+    //
+    // ⛏️ décommente la ligne ci-dessous et met la formule dans result
+    // il s'agit d'une ternaire qui permet de retouner soit 'null' si 'mass' est 'null', soit un 'objet' avec la propriété 'result'
+    return mass ? { result: 0.5 * mass * Math.sqrt(speed) } : null
+  }
 
-let tesla: car
-tesla = {name: 'tesla', mass: 1850, maxSpeed: 78}
+  let tesla: car
+  tesla = { name: "tesla", mass: 1850, maxSpeed: 78 }
 
-let teslaEnergie
-// ⛏️ décommente la ligne ci-dessous et appelle correctement la fonction 'kineticEnergy' avec 'tesla'
-// teslaEnergie = kineticEnergy(.....)
-displayText()
-// ⛏️ décommente sans modifier
-//`energie cinetique de ${tesla.name} est ${teslaEnergie.result} joules`,
+  let teslaEnergie
+  // ⛏️ décommente la ligne ci-dessous et appelle correctement la fonction 'kineticEnergy' avec 'tesla'
+  teslaEnergie = kineticEnergy(tesla.maxSpeed!, tesla.mass)!
+  displayText(
+    `energie cinetique de ${tesla.name} est ${teslaEnergie.result} joules`
+  )
+  // ⛏️ décommente sans modifier
 
-// 🐶 le type unknown permet de dire qu'on ne sait pas ce que contiendra la variable
-// nous les utiliseront ici pour pouvoir tester cast de type
-let unknowCarSpeed: unknown = 150
-let unknowCarMass: unknown = 2000
+  // 🐶 le type unknown permet de dire qu'on ne sait pas ce que contiendra la variable
+  // nous les utiliseront ici pour pouvoir tester cast de type
+  let unknowCarSpeed: unknown = 150
+  let unknowCarMass: unknown = 2000
 
-// ⛏️ décommente la ligne ci-dessous et appelle correctement la fonction 'kineticEnergy' avec 'unknowCarSpeed' et 'unknowCarMass'
-// unknowCarEnergie = kineticEnergy(.....)
-let unknowCarEnergie
+  // ⛏️ décommente la ligne ci-dessous et appelle correctement la fonction 'kineticEnergy' avec 'unknowCarSpeed' et 'unknowCarMass'
+  let unknowCarEnergie
+  unknowCarEnergie = kineticEnergy(
+    unknowCarSpeed as number,
+    unknowCarMass as number
+  )!
+  // ⛏️ décommente la ligne ci-dessous
+  displayText(`energie cinetique est ${unknowCarEnergie.result} joules`)
 
-// ⛏️ décommente la ligne ci-dessous
-// displayText(
-//   `energie cinetique est ${unknowCarEnergie.result} joules`
-//   )
-
-/*eslint
+  /*eslint
   @typescript-eslint/no-unused-vars: "off"
 */
-/*eslint
+  /*eslint
   @typescript-eslint/consistent-type-assertions : 'off'
 */
-};
-export default () => <App exercice={exercice} />;
+}
+export default () => <App exercice={exercice} />
